@@ -36,7 +36,7 @@ class DefaultController  extends AbstractController
     public function defaultRenderAction(Request $request): Response
     {
         $env_var = $_ENV['TESZT_ENV'];
-        
+    
         return $this->render('default/defaultrender.html.twig', [
             'welcome'=>'Hello W',
             'env_var'=>$env_var
