@@ -17,11 +17,14 @@ class DefaultController  extends AbstractController
     #[Route('/', "home")]
     public function defaultAction(): Response
     {
-        $number = random_int(0, 100);
 
-        return new Response(
-            '<html><body>Hello: '.$number.'</body></html>'
-        );
+        $items = [
+            "product"=>"OK"
+        ];
+
+        return $this->render('default/home.html.twig', [
+            'items'=>$items,
+        ]);
     }
 
     #[Route('/default-json', "default-json")]
