@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Service\Simplepay;
+
 /**
  *  Copyright (C) 2024 OTP Mobil Kft.
  *

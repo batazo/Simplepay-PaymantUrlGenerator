@@ -31,10 +31,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 //Import config data
-require_once 'src/config.php';
+require_once 'config.php';
 
 //Import SimplePayment class
-require_once 'src/SimplePayV21.php';
+require_once 'Simplepay.php';
 
 $trx = new SimplePayStart;
 
