@@ -7,15 +7,14 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use App\Service\Simplepay\SimplePayStart;
+use App\Service\Simplepay\SimplePayGetDatas;
 
 class DefaultController  extends AbstractController
 {
+    public $simpledata;
     public function __construct()
     {
-        
-
-        
+        $this->simpledata = new SimplePayGetDatas;
     }
 
     #[Route('/', "home")]
@@ -32,16 +31,16 @@ class DefaultController  extends AbstractController
             ],
             [
                 'ref' => 'Product ID 1',
-                'title' => 'Product name 2',
-                'desc' => 'Product description 2',
+                'title' => 'Product name 1',
+                'desc' => 'Product description 1',
                 'amount' => '1',
-                'price' => '2',
+                'price' => '5',
                 'tax' => '0',
             ]
         ];
 
         $ref = uniqid(true);
-        $paymentUrl = $this->getPaymetUrl($items, $ref);
+        $paymentUrl = $this->simpledata->getPaymetUrl($items, $ref);
 
         return $this->render('default/home.html.twig', [
             'items'=>$items,
@@ -51,26 +50,5 @@ class DefaultController  extends AbstractController
     }
 
 
-    public function getPaymetUrl($items, $ref){
-
-        require_once __DIR__ . '/../../config/simplepay.php';
-        
-        $trx = new SimplePayStart;
-        $currency = 'HUF';
-        $trx->addData('currency', $currency);
-        $trx->addConfig($config);
-
-        $trx->addData('total', 8);
-
-        foreach($items as $item){
-            $trx->addItems($item);
-        }
-        
-
-        $trx->addData('orderRef', $ref);
-        $trx->addData('customerEmail', 'sdk_test@otpmobil.com');
-        $trx->addData('url', 'http://simplepaymenturl.local/');
-        $trx->runStart();
-        return $trx->returnData;
-    }
+    
 }
