@@ -12,9 +12,9 @@ use App\Service\Simplepay\SimplePayGetDatas;
 class DefaultController  extends AbstractController
 {
     public $simpledata;
-    public function __construct()
+    public function __construct(SimplePayGetDatas $simpledata)
     {
-        $this->simpledata = new SimplePayGetDatas;
+        $this->simpledata = $simpledata;
     }
 
     #[Route('/', "home")]
