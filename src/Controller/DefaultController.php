@@ -32,7 +32,7 @@ class DefaultController  extends AbstractController
             [
                 'ref' => '1',
                 'title' => 'Cipő',
-                'desc' => 'Sport cipő',
+                'desc' => 'Sportcipő',
                 'amount' => '2',
                 'price' => '5000',
                 'tax' => '0',
@@ -40,7 +40,7 @@ class DefaultController  extends AbstractController
             [
                 'ref' => '2',
                 'title' => 'Kabát',
-                'desc' => 'Téli kabát',
+                'desc' => 'Télikabát',
                 'amount' => '2',
                 'price' => '10000',
                 'tax' => '0',
