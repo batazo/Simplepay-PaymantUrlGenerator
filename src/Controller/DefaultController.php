@@ -49,6 +49,11 @@ class DefaultController  extends AbstractController
         ]);
     }
 
-
-    
+    #[Route('/back', "back")]
+    public function backAction(): Response
+    {
+        return $this->render('default/back.html.twig', [
+            "test"=>"OK"
+        ]);
+    }
 }
