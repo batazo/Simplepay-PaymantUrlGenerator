@@ -8,10 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-
+use App\Traits\Test\Exponentiation;
 
 class DefaultController  extends AbstractController
 {
+    use Exponentiation;
     public function __construct()
     {
         
@@ -21,8 +22,7 @@ class DefaultController  extends AbstractController
     #[Route('/', "home")]
     public function defaultAction(): Response
     {
-        
-        $summ = szor(50, 20);
+        $sum = $this->double(4);//sum(5, 5);
 
         $items = [
             "product"=>"OK",
@@ -30,7 +30,7 @@ class DefaultController  extends AbstractController
 
         return $this->render('default/home.html.twig', [
             'items'=>$items,
-            'sum'=> $summ
+            'sum'=> $sum
         ]);
     }
 }

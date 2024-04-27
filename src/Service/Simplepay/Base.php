@@ -2,6 +2,11 @@
 
 namespace App\Service\Simplepay;
 
+use App\Traits\Simplepay\Signature;
+use App\Traits\Simplepay\Communication;
+use App\Traits\Simplepay\Views;
+use App\Traits\Simplepay\Logger;
+
 /**
  *  Copyright (C) 2024 OTP Mobil Kft.
  *
