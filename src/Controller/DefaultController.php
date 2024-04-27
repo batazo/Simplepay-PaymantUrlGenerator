@@ -9,38 +9,51 @@ use Symfony\Component\HttpFoundation\Response;
 
 use App\Service\Simplepay\SimplePayGetDatas;
 
+
 class DefaultController  extends AbstractController
 {
-    public $simpledata;
-    public function __construct(SimplePayGetDatas $simpledata)
+    public $simplestartdata;
+    public $simplebackdata;
+
+    public function __construct()
     {
-        $this->simpledata = $simpledata;
+        
+        
+        
     }
 
     #[Route('/', "home")]
     public function defaultAction(): Response
     {
+        $this->simplestartdata = new SimplePayGetDatas();
+
+        //Simulated products from database
         $items = [
             [
-                'ref' => 'Product ID 1',
-                'title' => 'Product name 1',
-                'desc' => 'Product description 1',
-                'amount' => '1',
-                'price' => '5',
+                'ref' => '1',
+                'title' => 'Cipő',
+                'desc' => 'Sport cipő',
+                'amount' => '2',
+                'price' => '5000',
                 'tax' => '0',
             ],
             [
-                'ref' => 'Product ID 1',
-                'title' => 'Product name 1',
-                'desc' => 'Product description 1',
-                'amount' => '1',
-                'price' => '5',
+                'ref' => '2',
+                'title' => 'Kabát',
+                'desc' => 'Téli kabát',
+                'amount' => '2',
+                'price' => '10000',
                 'tax' => '0',
             ]
         ];
 
         $ref = uniqid(true);
-        $paymentUrl = $this->simpledata->getPaymetUrl($items, $ref);
+        
+        $total = array_reduce($items, function ($carry, $item) {
+            return $carry + $item['price'] * $item['amount'];
+        }, 0);
+
+        $paymentUrl = $this->simplestartdata->getPaymetUrl($items, $ref, $total);
 
         return $this->render('default/home.html.twig', [
             'items'=>$items,
@@ -50,8 +63,13 @@ class DefaultController  extends AbstractController
     }
 
     #[Route('/back', "back")]
-    public function backAction(): Response
+    public function backAction(Request $request): Response
     {
+        $this->simplebackdata = new SimplePayGetDatas();
+        $queryArr = $request->query->all();
+        $result = $this->simplebackdata->getBackData($queryArr["r"], $queryArr["s"]);
+        dump($result);
+
         return $this->render('default/back.html.twig', [
             "test"=>"OK"
         ]);
