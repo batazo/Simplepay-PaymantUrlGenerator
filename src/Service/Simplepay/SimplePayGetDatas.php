@@ -44,7 +44,7 @@ class SimplePayGetDatas
         
         $trx->addData('orderRef', $ref);
         $trx->addData('customerEmail', 'sdk_test@otpmobil.com');
-        $trx->addData('url', 'http://simplepaymenturl.local/back');
+        $trx->addData('url', 'http://' . $_SERVER["HTTP_HOST"] . '/back');
         $trx->runStart();
         return $trx->returnData;
     }
@@ -54,7 +54,6 @@ class SimplePayGetDatas
         $result = array();
         if (isset($r) && isset($s)) {
             $sign = $trx->isBackSignatureCheck($r, $s);
-            dump($sign);
             if ($sign) {
                 $result = $trx->getRawNotification();
             }
