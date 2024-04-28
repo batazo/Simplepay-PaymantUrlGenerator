@@ -48,7 +48,7 @@ class DefaultController  extends AbstractController
         ];
 
         $ref = uniqid(true);
-        
+
         $total = array_reduce($items, function ($carry, $item) {
             return $carry + $item['price'] * $item['amount'];
         }, 0);
@@ -68,10 +68,9 @@ class DefaultController  extends AbstractController
         $this->simplebackdata = new SimplePayGetDatas();
         $queryArr = $request->query->all();
         $result = $this->simplebackdata->getBackData($queryArr["r"], $queryArr["s"]);
-        dump($result);
 
         return $this->render('default/back.html.twig', [
-            "test"=>"OK"
+            "result"=>$result
         ]);
     }
 }
