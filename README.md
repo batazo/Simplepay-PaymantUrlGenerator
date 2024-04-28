@@ -1,5 +1,4 @@
-# Simplepay-PaymentUrlGenerator
-Test Simplepay to get payment url
+# SimplePay Symfony Service
 
 ## Inslall
 composer install
