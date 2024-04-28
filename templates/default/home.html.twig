@@ -1,11 +1,11 @@
 <html>
 <body>
    <div>ITEMS :::</div>
-   <div>{{dump(items)}}</div>
+   <div>{{dump(items)|raw}}</div>
    div>{% if ref is defined %}REF :::{% endif %}</div>
-   <div>{% if ref is defined %}{{dump(ref)}}{% endif %}</div>
+   <div>{% if ref is defined %}{{dump(ref)|raw}}{% endif %}</div>
    <div>{% if paymentUrl is defined %}PAYMENT DATA :::{% endif %}</div>
-   <div>{% if paymentUrl is defined %}{{dump(paymentUrl)}}{% endif %}</div>
+   <div>{% if paymentUrl is defined %}{{dump(paymentUrl)|raw}}{% endif %}</div>
    {% if paymentUrl.paymentUrl is defined %}<div><a href={{paymentUrl.paymentUrl}}>FIZETEK</a></div>{% endif %}
    <script>console.log("WELCOME")</script>
 </body>
