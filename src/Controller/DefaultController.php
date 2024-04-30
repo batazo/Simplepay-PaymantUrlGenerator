@@ -59,7 +59,7 @@ class DefaultController  extends AbstractController
             return $carry + $item['price'] * $item['amount'];
         }, 0) - $order['discount'] + $order["shippingCost"];
 
-        $paymentUrl = $this->simplestartdata->getPaymetUrl($order, $ref, $total);
+        $paymentUrl = $this->simplestartdata->getPaymetUrl($ref, $total);
 
         return $this->render('default/home.html.twig', [
             'order'=>$order,
