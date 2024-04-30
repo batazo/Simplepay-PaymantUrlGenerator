@@ -28,36 +28,42 @@ class DefaultController  extends AbstractController
         $this->simplestartdata = new SimplePayGetDatas();
 
         //Simulated products from database
-        $items = [
-            [
-                'ref' => '1',
-                'title' => 'Cipő',
-                'desc' => 'Sportcipő',
-                'amount' => '2',
-                'price' => '5000',
-                'tax' => '0',
+        $order = [
+            "products"=>[
+                [
+                    'ref' => '1',
+                    'title' => 'Cipő',
+                    'desc' => 'Sportcipő',
+                    'amount' => '2',
+                    'price' => '5000',
+                    'tax' => '0',
+                ],
+                [
+                    'ref' => '2',
+                    'title' => 'Kabát',
+                    'desc' => 'Télikabát',
+                    'amount' => '2',
+                    'price' => '10000',
+                    'tax' => '0',
+                ],
             ],
-            [
-                'ref' => '2',
-                'title' => 'Kabát',
-                'desc' => 'Télikabát',
-                'amount' => '2',
-                'price' => '10000',
-                'tax' => '0',
-            ]
+            "discount"=>5000,
+            "shippingCost"=>2510
+            
         ];
 
         $ref = uniqid(true);
 
         
-        $total = array_reduce($items, function ($carry, $item) {
+        $total = array_reduce($order["products"], function ($carry, $item) {
             return $carry + $item['price'] * $item['amount'];
-        }, 0);
+        }, 0) - $order['discount'] + $order["shippingCost"];
 
-        $paymentUrl = $this->simplestartdata->getPaymetUrl($items, $ref, $total);
+        $paymentUrl = $this->simplestartdata->getPaymetUrl($order, $ref, $total);
 
         return $this->render('default/home.html.twig', [
-            'items'=>$items,
+            'order'=>$order,
+            'total'=>$total,
             'ref'=> $ref,
             'paymentUrl'=>$paymentUrl
         ]);

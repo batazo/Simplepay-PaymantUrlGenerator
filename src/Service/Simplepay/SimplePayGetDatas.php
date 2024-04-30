@@ -32,17 +32,18 @@ class SimplePayGetDatas
         return $trx;
 
     }
-    public function getPaymetUrl($items, $ref, $total = 0){
+    public function getPaymetUrl($order, $ref, $total = 0){
         $trx = $this->createTransaction(SimplePayStart::class);
         $trx->addData('currency', $this->currency);
+        $trx->addData('orderRef', $ref);
         $trx->addData('total', $total);
-        if($items){
-            foreach($items as $item){
+        if($order["products"]){
+            foreach($order["products"] as $item){
                 $trx->addItems($item);
             }
         }
-        
-        $trx->addData('orderRef', $ref);
+        $trx->addData('discount', $order["discount"]);
+        $trx->addData('shippingCost', $order["shippingCost"]);
         $trx->addData('customerEmail', 'sdk_test@otpmobil.com');
         $trx->addData('url', 'http://' . $_SERVER["HTTP_HOST"] . '/back');
         $trx->runStart();

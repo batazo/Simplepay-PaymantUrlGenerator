@@ -1,7 +1,9 @@
 <html>
 <body>
-   <div>ITEMS :::</div>
-   <div>{{dump(items)|raw}}</div>
+   <div>ORDER :::</div>
+   <div>{{dump(order)|raw}}</div>
+   <div>TOTAL :::</div>
+   <div>{{dump(total)|raw}}</div>
    <div>{% if ref is defined %}REF :::{% endif %}</div>
    <div>{% if ref is defined %}{{dump(ref)|raw}}{% endif %}</div>
    <div>{% if paymentUrl is defined %}PAYMENT DATA :::{% endif %}</div>
