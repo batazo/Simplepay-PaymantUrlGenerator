@@ -1,7 +1,7 @@
 # SimplePay Symfony Service
 
 ## Inslall
-composer install
+composer install batazo/Simplepay-Symfony-Service
 
 ## Usage
 - Apache virtual host
